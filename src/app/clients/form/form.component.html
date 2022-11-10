@@ -1,0 +1,77 @@
+<div class="alert alert-danger" *ngIf="errors.length > 0" >
+  <ul>
+    <li *ngFor="let err of errors">{{ err }}</li>
+  </ul>
+</div>
+
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    {{ title }}
+  </div>
+  <div class="card-body">
+    <form [formGroup]="formClient">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Name client"
+          formControlName="name"
+        />
+        <small *ngIf="validateField('name', 'required')" class="text-danger"
+          >Name is required.</small
+        >
+        <small *ngIf="validateField('name', 'minlength')" class="text-danger"
+          >Min length for name is > 4.</small
+        >
+      </div>
+      <div class="mb-3">
+        <label for="surnames" class="form-label">Surnames:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Surnames"
+          placeholder="Surnames client"
+          formControlName="surnames"
+        />
+        <small *ngIf="validateField('surnames', 'required')" class="text-danger"
+          >Surnames is required.</small
+        >
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Email client:"
+          formControlName="email"
+        />
+        <small *ngIf="validateField('email', 'required')" class="text-danger"
+          >Name is required.</small
+        >
+      </div>
+      <div class="col-12">
+        <button
+          type="button"
+          class="btn btn-primary"
+          *ngIf="!clientId; else update"
+          (click)="create()"
+        >
+          Create client
+        </button>
+        <ng-template #update>
+          <button
+            type="button"
+            class="btn btn-primary"
+            *ngIf="clientId"
+            (click)="updateClient()"
+          >
+            Update client
+          </button>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+</div>

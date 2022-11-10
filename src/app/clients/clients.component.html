@@ -1,0 +1,56 @@
+<div class="card border-primary">
+  <div class="card-header">Clients</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">List clients</h5>
+    <div class="my-2 text-left">
+      <button
+        type="button"
+        class="btn btn-primary btn-rounded"
+        [routerLink]="['/clients/create']"
+      >
+        New client
+      </button>
+    </div>
+    <table class="table" *ngIf="clients.length > 0; else notResults">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Surnames</th>
+          <th scope="col">Email</th>
+          <th scope="col">Created At</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.name }}</td>
+          <td>{{ client.surnames }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.createAt }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-dark"
+              [routerLink]="['/clients/edit', client.id]"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteClient(client)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #notResults>
+      <div class="alert alert-info" role="alert">Not results...</div>
+    </ng-template>
+  </div>
+</div>
